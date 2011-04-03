@@ -1,0 +1,17 @@
+<form method="post">
+  <b>Titel</b> <br />
+  <input name="title" value="<%= @page.title %>"/> </br>
+  <b>Titel in der Zielsprache</b> <br />
+  <input name="localized_title" value="<%= @page.localized_title %>"</b> <br />
+  <b>Sprache:</b><br />
+  <input name="language" value="<%= @page.language || "de" %>" /> <br />
+  <b>Markdown-Code</b><br />
+  <textarea name="body" ><%= @page.body %></textarea><br />
+  <b>Footer-Element:<b><input type="checkbox" name="footer" <%= @page.footer ? 'checked="checked"' : "" %>/></br>
+
+  <input type="hidden" name="root" value="<%=@page.root %>" />
+  <input type="hidden" name="page_id" value="<%=@page.page_id%>" />
+
+  <input type="submit" />
+
+</form>

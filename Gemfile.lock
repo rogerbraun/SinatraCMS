@@ -1,0 +1,36 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    addressable (2.2.4)
+    data_objects (0.10.3)
+      addressable (~> 2.1)
+    dm-core (1.1.0)
+      addressable (~> 2.2.4)
+    dm-do-adapter (1.1.0)
+      data_objects (~> 0.10.2)
+      dm-core (~> 1.1.0)
+    dm-migrations (1.1.0)
+      dm-core (~> 1.1.0)
+    dm-sqlite-adapter (1.1.0)
+      dm-do-adapter (~> 1.1.0)
+      do_sqlite3 (~> 0.10.2)
+    do_sqlite3 (0.10.3)
+      data_objects (= 0.10.3)
+    maruku (0.6.0)
+      syntax (>= 1.0.0)
+    rack (1.2.2)
+    sinatra (1.2.1)
+      rack (~> 1.1)
+      tilt (< 2.0, >= 1.2.2)
+    syntax (1.0.0)
+    tilt (1.2.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  dm-core
+  dm-migrations
+  dm-sqlite-adapter
+  maruku
+  sinatra

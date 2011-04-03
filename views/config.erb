@@ -1,0 +1,44 @@
+<h1>Konfiguration</h2>
+
+<h2>Seiten für den Hauptteil</h2>
+  <table>
+  <tr>
+    <td>Seitenname</td>
+    <td>Sprache</td>
+    <td>Bearbeiten</td>
+    <td>Elternseite</td>
+    <td>Kindseite</td>
+    <td>Position</td>
+  </tr>
+  <% @pages.each do |page| %>
+    <tr>
+      <td><%= page.title %></td>
+      <td><%= page.language %></td>
+      <td><a href="<%= url "/admin/page/#{page.id}/edit"%>">Bearbeiten</a></td>
+      <td><%= page.page ? "Elternseite ist #{page.page.title}" : "Hat keine Elternseite"%></td>
+      <td><a href="<%= url "/admin/page/#{page.id}/new "%>">Kindseite erstellen</a>
+      <td><form method="post" action="<%= url "/admin/page/#{page.id}/move_up" %>"><button>Höher</button></form>
+    </tr>
+  <% end %>
+  </table>
+<h2>Seiten für den Fußbereich</h2>
+  <table>
+  <tr>
+    <td>Seitenname</td>
+    <td>Sprache</td>
+    <td>Bearbeiten</td>
+    <td>Position</td>
+  </tr>
+  <% @foot_pages.each do |page| %>
+    <tr>
+      <td><%= page.title %></td>
+      <td><%= page.language %></td>
+      <td><a href="<%= url "/admin/page/#{page.id}/edit"%>">Bearbeiten</a></td>
+      <td><form method="post" action="<%= url "/admin/page/#{page.id}/move_up" %>"><button>Höher</button></form>
+    </tr>
+  <% end %>
+  </table>
+  <a href="<%= url "/admin/page/new" %>">Neue Seite</a>
+  
+
+    
