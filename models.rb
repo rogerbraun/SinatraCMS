@@ -16,7 +16,7 @@ class Page
   before :create, :setposition
 
   def setposition
-    unless Page.all.count == 1 
+    unless Page.all.count == 0 
       self.position = Page.all.max_by(&:position).position + 1
       puts self.position
     end
