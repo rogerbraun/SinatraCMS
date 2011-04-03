@@ -1,4 +1,11 @@
+enable :sessions
+
 helpers do
+
+  def languages
+    Page.all.map(&:language).uniq
+  end
+
   def language
     session["language"] || "de"
   end
@@ -37,8 +44,8 @@ before do
 end
 
 get "/" do
-  @body = Page.first.body
-  @title = Page.first.localized_title
+  @body = Page.first(:language => language).body
+  @title = Page.first(:language => language).localized_title
   erb :template
 end
 
@@ -110,12 +117,18 @@ post "/admin/page/:id/move_up" do
   redirect back
 end
 
+get "/language" do
+  session["language"] = params[:language]
+  redirect back
+end
+
 get "/:url" do
 
-  page = Page.first(:title => params[:url])
+  page = Page.first(:title => params[:url], :language => language)
   redirect to "/" unless page
   @body = page.body
   @title = page.localized_title
   erb :template
 
 end
+

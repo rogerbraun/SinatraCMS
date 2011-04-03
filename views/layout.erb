@@ -30,11 +30,22 @@
         </div>
 
         <div class="span-16 last">
+          </form>
   
         </div>
 
         <div id="nav" class="span-24 last hyphenate">
           <%= nav_bar %>
+          <% if languages.size > 1 %>
+            <form id="language_select" action="<%= url "/language" %>">
+              <select onchange="document.getElementById('language_select').submit();" name="language">
+                <% languages.each do |l| %>
+                  <option <%= "selected='selected'" if language == l%>><%= l %></option>
+                <% end %>
+
+              </select>
+            </form>
+          <% end %>
         </div>
       
       </div>

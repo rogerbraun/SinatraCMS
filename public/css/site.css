@@ -51,3 +51,8 @@ border-bottom-left-radius: 5px;
   padding-top:20px;
   font-size:1.4em;
 }
+
+#language_select{
+  float:right;
+  padding-right:10px;
+}
