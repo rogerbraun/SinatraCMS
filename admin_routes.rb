@@ -10,11 +10,21 @@ get "/admin/page/new" do
   erb :new_page, :layout => :admin_layout
 end
 
+post "/admin/page/new" do
+  save_by_params(params)
+  redirect to "/admin/config"
+end
+
 get "/admin/page/:id/new" do
   @page = Page.new
   @page.root = false
   @page.page_id = params[:id]
   erb :new_page, :layout => :admin_layout
+end
+
+post "/admin/page/:id/new" do
+  save_by_params(params)
+  redirect to "/admin/config"
 end
 
 get "/admin/page/:id/edit" do
@@ -24,16 +34,6 @@ end
 
 post "/admin/page/:id/edit" do
   save_by_params(params,page)
-  redirect to "/admin/config"
-end
-
-post "/admin/page/new" do
-  save_by_params(params)
-  redirect to "/admin/config"
-end
-
-post "/admin/page/:id/new" do
-  save_by_params(params)
   redirect to "/admin/config"
 end
 

@@ -6,7 +6,7 @@
   <b>Sprache:</b><br />
   <input name="language" value="<%= @page.language || "de" %>" /> <br />
   <b>Markdown-Code</b><br />
-  <textarea name="body" ><%= @page.body %></textarea><br />
+  <textarea cols="60" rows="30" name="body" ><%= @page.body %></textarea><br />
   <b>Footer-Element:<b><input type="checkbox" name="footer" <%= @page.footer ? 'checked="checked"' : "" %>/></br>
 
   <input type="hidden" name="root" value="<%=@page.root %>" />
