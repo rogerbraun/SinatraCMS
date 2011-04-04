@@ -10,8 +10,8 @@ helpers do
     session["language"] || "de"
   end
 
-  def listify(pages)
-    ret = "<ul>"
+  def listify(pages, ulclass="")
+    ret = "<ul class='#{ulclass}'>"
     ret += pages.sort_by(&:position).map do |page|
       "<li><a href='#{url("/" + page.title)}'>#{page.localized_title}</a>#{unless page.pages.empty? then listify page.pages end}<li>"
     end.join("")
@@ -20,16 +20,7 @@ helpers do
   end
 
   def nav_bar
-    ret = "<ul class='sf-menu'>"
-    ret += Page.all(:language => language, :root => true, :footer => false).sort_by(&:position).map do |page|
-      "<li><a href='#{url("/" + page.title)}'>#{page.localized_title}</a>#{
-        unless page.pages.empty?
-          listify(page.pages)
-        end}</li>"
-      end.join("")
-
-    ret += "</ul>"
-    ret
+    listify Page.all(:language => language, :root => true, :footer => false), "sf-menu"
   end
 
   def footer
