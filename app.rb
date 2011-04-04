@@ -30,6 +30,22 @@ helpers do
   end
 end
 
+def save_by_params(params, page = nil)
+
+  params.delete("id")
+  params.delete("page_id") if params["page_id"].empty?
+
+  params["root"] = params[:root] == "true"
+  params["footer"] = !!params["footer"]
+  params["title"] = params["title"].downcase
+ 
+  if page 
+    page.update(params)
+  else
+    Page.create(params)
+  end
+end
+
 before do
   redirect to "/admin/config" unless Page.first || request.path_info["admin"] 
 end
@@ -65,36 +81,17 @@ get "/admin/page/:id/edit" do
 end
 
 post "/admin/page/:id/edit" do
-  @page = Page.get(params[:id])
-  params.delete("id")
-  params.delete("page_id") if params["page_id"].empty?
-
-  params["root"] = params[:root] == "true"
-  params["footer"] = !!params["footer"]
-  
-  puts params
-  @page.update(params)
-  
+  save_by_params(params,page)
   redirect to "/admin/config"
 end
 
 post "/admin/page/new" do
-  params.delete("page_id")
-  params["root"] = params[:root] == "true"
-  params["footer"] = !!params["footer"]
-  params["title"] = params["title"].downcase
-  puts params
-  Page.create(params)
+  save_by_params(params)
   redirect to "/admin/config"
 end
 
 post "/admin/page/:id/new" do
-  params.delete("id")
-  params["root"] = params[:root] == "true"
-  params["footer"] = !!params["footer"]
-  params["title"] = params["title"].downcase
-  puts params
-  Page.create(params)
+  save_by_params(params)
   redirect to "/admin/config"
 end
 
