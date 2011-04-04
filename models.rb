@@ -9,6 +9,8 @@ class Page
   property :position, Integer, :default => 0
   property :footer, Boolean
   property :root, Boolean
+  property :plugin, String
+  property :plugin_params, Text
 
   has n, :pages
   belongs_to :page, :required => false

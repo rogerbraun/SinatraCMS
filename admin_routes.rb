@@ -15,6 +15,17 @@ post "/admin/page/new" do
   redirect to "/admin/config"
 end
 
+get "/admin/page/plugin/new" do
+  @page = Page.new
+  @page.root = true
+  erb :new_plugin, :layout => :admin_layout
+end
+
+post "/admin/page/plugin/new" do
+  save_by_params(params) 
+  redirect to "/admin/config" 
+end
+
 get "/admin/page/:id/new" do
   @page = Page.new
   @page.root = false

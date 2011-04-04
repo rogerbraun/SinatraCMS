@@ -23,9 +23,7 @@ end
 require "./admin_routes.rb"
 
 get "/" do
-  @body = Page.first(:language => language).body
-  @title = Page.first(:language => language).localized_title
-  erb :template
+  redirect to "/#{Page.first(:language => language).title}"
 end
 
 get "/language" do
@@ -37,8 +35,13 @@ get "/:url" do
 
   page = Page.first(:title => params[:url], :language => language)
   redirect to "/" unless page
-  @body = page.body
-  @title = page.localized_title
+  if page.plugin then
+    @body = PLUGINS[page.plugin.to_i].to_html(page.plugin_params) 
+    @title = page.localized_title
+  else
+    @body = Maruku.new(page.body).to_html
+    @title = page.localized_title
+  end
   erb :template
 
 end
