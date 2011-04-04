@@ -44,6 +44,7 @@ get "/admin/page/:id/edit" do
 end
 
 post "/admin/page/:id/edit" do
+  page = Page.get(params[:id])
   save_by_params(params,page)
   redirect to "/admin/config"
 end
