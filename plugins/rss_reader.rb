@@ -10,12 +10,11 @@ class RSSReader
 
   def to_html(param)
     feed = Feedzirra::Feed.fetch_and_parse param
-    puts feed
     out = feed.entries.map do |entry|
-      "<h4>#{entry.published}</h4>
+      "<h4>#{entry.title}</h4>
+       <h5>#{entry.published}</h5>
        <p>#{entry.content || entry.summary}</p>"
     end.join("")
-    puts out
     out
   end
 
