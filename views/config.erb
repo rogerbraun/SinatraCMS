@@ -9,6 +9,7 @@
     <td>Elternseite</td>
     <td>Kindseite</td>
     <td>Position</td>
+    <td>Löschen</td>
   </tr>
   <% @pages.each do |page| %>
     <tr>
@@ -18,6 +19,7 @@
       <td><%= page.page ? "Elternseite ist #{page.page.title}" : "Hat keine Elternseite"%></td>
       <td><a href="<%= url "/admin/page/#{page.id}/new "%>">Kindseite erstellen</a>
       <td><form method="post" action="<%= url "/admin/page/#{page.id}/move_up" %>"><button>Höher</button></form>
+      <td><form method="post" action="<%= url "/admin/page/#{page.id}/destroy" %>"><button onclick="return confirm('Wirklich diese Seite löschen?')">Löschen</button></form>
     </tr>
   <% end %>
   </table>

@@ -38,6 +38,11 @@ post "/admin/page/:id/new" do
   redirect to "/admin/config"
 end
 
+post "/admin/page/:id/destroy" do
+  Page.get(params[:id]).destroy
+  redirect to "/admin/config"
+end
+
 get "/admin/page/:id/edit" do
   @page = Page.get(params[:id])
   erb :new_page, :layout => :admin_layout
